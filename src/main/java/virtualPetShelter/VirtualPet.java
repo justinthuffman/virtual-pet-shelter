@@ -10,13 +10,17 @@ public class VirtualPet {
 	int tiredness;
 
 	// pet characteristics
-	public VirtualPet(int initialHunger, int initialThirst, int initialWaste, int initialBoredom,
-			int initialTiredness) {
+	public VirtualPet(int initialHunger, int initialThirst, int initialWaste, int initialBoredom, int initialTiredness,
+			String petName) {
 		hunger = initialHunger;
 		thirst = initialThirst;
 		waste = initialWaste;
 		boredom = initialBoredom;
 		tiredness = initialTiredness;
+	}
+
+	public String petNameEntry() {
+		return ("Please name your pet: ");
 	}
 
 	public String userInputChoices() {
@@ -25,79 +29,52 @@ public class VirtualPet {
 
 	// actions and repercussions
 	public void eat() {
-		hunger -= 5;
-		thirst += 1;
-		waste += 2;
-		boredom += 1;
-		tiredness += 1;
+		hunger -= 7;
+		System.out.print("\n \n \n \n \n \n \n \n \n \n \n \n");
+		System.out.println("Mmmmmm mmmmm good. They love your cooking.");
+
 	}
 
 	public void drink() {
-		hunger += 1;
-		thirst -= 5;
-		waste += 2;
-		boredom += 1;
-		tiredness += 1;
+		thirst -= 7;
+
 	}
 
 	public void bathroom() {
-		hunger += 1;
-		thirst += 1;
-		waste -= 5;
-		boredom += 1;
-		tiredness += 1;
+		waste -= 7;
+
 	}
 
 	public void play() {
-		hunger += 2;
-		thirst += 2;
-		waste += 0;
-		boredom -= 5;
-		tiredness += 2;
+		boredom -= 7;
 	}
 
 	public void sleep() {
+		tiredness -= 7;
+	}
+
+	public void tick() {
 		hunger += 2;
 		thirst += 2;
 		waste += 2;
-		boredom += 0;
-		tiredness -= 5;
-	}
-
-	public void godMode() {
-		hunger -= 999999999;
-		thirst -= 999999999;
-		waste -= 999999999;
-		boredom -= 999999999;
-		tiredness -= 999999999;
+		boredom += 2;
+		tiredness += 2;
 	}
 
 	// status check
 	public String statusUpdate() {
 		if (hunger > 3) {
-			return "               )\\._.,--....,'``.       \n" + " .b--.        /;   _.. \\   _\\  (`._ ,. \n"
-					+ "`=,-,-'~~~   `----(,_..'--(,_..'`-.;.'\n \n Your cat is hungry!\n";
+			return "Your cat is hungry!\n";
 		} else if (thirst > 3) {
-			return "    (\"`-''-/\").___..--''\"`-._\n" + "     `6_ 6  )   `-.  (     ).`-.__.`)\n"
-					+ "     (_Y_.)'  ._   )  `._ `. ``-..-'\n" + "   _..`--'_..-_/  /--'_.' ,'\n"
-					+ "  (il).-''  (li).'  ((!.-' \n--Your cat is thirsty!\n";
+			return "Your cat is thirsty!\n";
 		} else if (waste > 3) {
-			return "                       (`.-,')\n" + "                     .-'     ;\n"
-					+ "                 _.-'   , `,-\n" + "           _ _.-'     .'  /._\n"
-					+ "         .' `  _.-.  /  ,'._;)\n" + "        (       .  )-| (\n"
-					+ "         )`,_ ,'_,'  \\_;)  \n" + " ('_  _,'.'  (___,))\n" + "  `-:;.-'\n"
-					+ "\n --Everybody has to poop, and so does your cat... like right now.\n";
+			return "Everybody has to poop, and so does your cat... like right now.\n";
+		} else if (boredom > 3) {
+			return "You're SO BORING. Play with your cat!\n";
 		} else if (tiredness > 3) {
-			return "   |\\      _,,,---,,_\n" + "   /,`.-'`'    -.  ;-;;,_\n" + "  |,4-  ) )-,_..;\\ (  `'-'\n"
-					+ " '---''(_/--'  `-'\\_) \n--Your cat seems sleepy.\n";
+			return "Your cat seems sleepy.\n";
 		} else
-			return "                                 _\n" + "                                | \\\n"
-					+ "                                | |\n" + "                                | |\n"
-					+ "           |\\                   | |\n" + "          /, ~\\                / /\n"
-					+ "         X     `-.....-------./ /\n" + "          ~-. ~  ~              |\n"
-					+ "             \\             /    |\n" + "              \\  /_     ___\\   /\n"
-					+ "              | /\\ ~~~~~   \\ |\n" + "              | | \\        || |\n"
-					+ "              | |\\ \\       || )\n" + "             (_/ (_/      ((_/";
+			return "";
 	}
 
 	boolean notDead() {

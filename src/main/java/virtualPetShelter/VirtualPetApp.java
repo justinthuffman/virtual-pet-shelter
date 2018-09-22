@@ -2,10 +2,14 @@ package virtualPetShelter;
 
 import java.util.Scanner;
 
-public class VirtualPetShelter {
+public class VirtualPetApp {
+
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
+//Welcome and sets vars to 0
 		VirtualPet myVirtualPetInstance = new VirtualPet(0, 0, 0, 0, 0);
+
+//Sets responses/actions to user input
 		String petAction;
 		while (myVirtualPetInstance.notDead()) {
 			do {
@@ -68,8 +72,15 @@ public class VirtualPetShelter {
 				break;
 
 			}
-
+		}
+		// your pet died
+		if (myVirtualPetInstance.notDead() == false) {
+			System.out.print(
+					"\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n");
+			System.out.println("Ya blew it! " + myVirtualPetInstance.death());
+			System.exit(0);
 		}
 		input.close();
+
 	}
 }
