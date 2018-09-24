@@ -1,75 +1,66 @@
 package virtualPetShelter;
 
-import java.util.Scanner;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class VirtualPetShelter {
-	public static void main(String[] args) {
-		Scanner input = new Scanner(System.in);
-		VirtualPet myVirtualPetInstance = new VirtualPet(0, 0, 0, 0, 0);
-		String petAction;
-		while (myVirtualPetInstance.notDead()) {
-			do {
-				System.out.println(myVirtualPetInstance.userInputChoices());
-				petAction = input.nextLine();
-			} while (!petAction.equals("1") && !petAction.equals("2") && !petAction.equals("3")
-					&& !petAction.equals("4") && !petAction.equals("5"));
-			switch (petAction) {
-			case "1":
-				myVirtualPetInstance.eat();
-				myVirtualPetInstance.tick();
-				if (myVirtualPetInstance.notDead() == true) {
-					System.out.println("");
-					System.out.println(myVirtualPetInstance.statusUpdate());
-				}
-				break;
 
-			case "2":
-				System.out.print("\n \n \n \n \n \n \n \n \n \n \n \n");
-				System.out.println("They drank SO MUCH!");
-				myVirtualPetInstance.drink();
-				myVirtualPetInstance.tick();
-				if (myVirtualPetInstance.notDead() == true) {
-					System.out.println("");
-					System.out.println(myVirtualPetInstance.statusUpdate());
-				}
-				break;
+	VirtualPet adoptablePet = new VirtualPet(null, null);
+	Map<String, VirtualPet> myVirtualShelter = new HashMap<String, VirtualPet>();
 
-			case "3":
-				System.out.print("\n \n \n \n \n \n \n \n \n \n \n \n");
-				System.out.println("They look so relieved!");
-				myVirtualPetInstance.bathroom();
-				myVirtualPetInstance.tick();
-				if (myVirtualPetInstance.notDead() == true) {
-					System.out.println("");
-					System.out.println(myVirtualPetInstance.statusUpdate());
-				}
-				break;
+	public Collection<VirtualPet> availablePets() {
+		return myVirtualShelter.values();
+	}
 
-			case "4":
-				System.out.print("\n \n \n \n \n \n \n \n \n \n \n \n");
-				System.out.println("All work and no play makes Homer something something");
-				myVirtualPetInstance.play();
-				myVirtualPetInstance.tick();
-				if (myVirtualPetInstance.notDead() == true) {
-					System.out.println("");
-					System.out.println(myVirtualPetInstance.statusUpdate());
-				}
-				break;
+	public void addPet(VirtualPet adoptablePet) {
+		String petsAvailable = adoptablePet.getName();
+		myVirtualShelter.put(petsAvailable, adoptablePet);
+	}
 
-			case "5":
-				System.out.print("\n \n \n \n \n \n \n \n \n \n \n \n");
-				System.out.println("Don't let the bedbugs bite (unless you're into that sort of thing).");
-				myVirtualPetInstance.sleep();
-				myVirtualPetInstance.tick();
-				if (myVirtualPetInstance.notDead() == true) {
-					System.out.println("");
-					System.out.println(myVirtualPetInstance.statusUpdate());
-				}
-				break;
+	public void adoptPet(String adoption) {
+		myVirtualShelter.remove(adoption);
+	}
 
-			}
-
+	public void showPets(VirtualPet adoptablePet) {
+		for (Entry<String, VirtualPet> entry : myVirtualShelter.entrySet()) {
+			System.out.println("Name : " + entry.getKey() + "\tHunger: " + entry.getValue().getHunger() + "\tThirst: "
+					+ entry.getValue().getThirst() + "\tBoredom: " + entry.getValue().getBoredom());
 		}
-		input.close();
+	}
+
+	public VirtualPet getPet(String name) {
+		return myVirtualShelter.get(name);
+	}
+
+	public void showPetName(VirtualPet adoptablePet) {
+
+		for (Entry<String, VirtualPet> entry : myVirtualShelter.entrySet()) {
+			System.out.print(entry.getKey() + "\t" + entry.getValue().getDescription() + "\n");
+		}
+	}
+
+	public void feedPets(VirtualPet adoptablePet) {
+		for (VirtualPet entries : availablePets()) {
+			entries.feed();
+		}
+	}
+
+	public void waterPets(VirtualPet adoptablePet) {
+		for (VirtualPet entries : availablePets()) {
+			entries.water();
+		}
+	}
+
+	public void tick(VirtualPet adoptablePet) {
+
+		for (VirtualPet entries : availablePets()) {
+			entries.tick();
+		}
+	}
+
+	public boolean hasPets() {
+		return !myVirtualShelter.isEmpty();
 	}
 }

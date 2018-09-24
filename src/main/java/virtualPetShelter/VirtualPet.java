@@ -1,101 +1,69 @@
 package virtualPetShelter;
 
+//naming
+//feeding
+//watering
+//playing
+//adopiton (pet out)
+//intake (pet in)
+
 public class VirtualPet {
+	public String petName;
+	public String petDescription;
+	public int petHunger;
+	public int petThirst;
+	public int petBoredom;
 
-	// Traits of virtual pet
-	int hunger;
-	int thirst;
-	int waste;
-	int boredom;
-	int tiredness;
-
-	// pet characteristics
-	public VirtualPet(int initialHunger, int initialThirst, int initialWaste, int initialBoredom, int initialTiredness,
-			String petName) {
-		hunger = initialHunger;
-		thirst = initialThirst;
-		waste = initialWaste;
-		boredom = initialBoredom;
-		tiredness = initialTiredness;
+	public VirtualPet(String name, int hunger, int thirst, int boredom) {
+		petName = name;
+		petHunger = hunger;
+		petThirst = thirst;
+		petBoredom = boredom;
 	}
 
-	public String petNameEntry() {
-		return ("Please name your pet: ");
+	public VirtualPet(String name, String description) {
+		this.petName = name;
+		this.petDescription = description;
+		this.petHunger = 0;
+		this.petThirst = 0;
+		this.petBoredom = 0;
 	}
 
-	public String userInputChoices() {
-		return ("What would you like to do:\n1. Feed\n2. Water\n3. Let out\n4. Play with\n5. Send to bed");
+	public String getName() {
+		return petName;
 	}
 
-	// actions and repercussions
-	public void eat() {
-		hunger -= 7;
-		System.out.print("\n \n \n \n \n \n \n \n \n \n \n \n");
-		System.out.println("Mmmmmm mmmmm good. They love your cooking.");
-
+	public String getDescription() {
+		return petDescription;
 	}
 
-	public void drink() {
-		thirst -= 7;
-
+	public int getHunger() {
+		return petHunger;
 	}
 
-	public void bathroom() {
-		waste -= 7;
+	public int getThirst() {
+		return petThirst;
+	}
 
+	public int getBoredom() {
+		return petBoredom;
+	}
+
+	public void feed() {
+		petHunger -= 7;
+	}
+
+	public void water() {
+		petThirst -= 7;
 	}
 
 	public void play() {
-		boredom -= 7;
-	}
-
-	public void sleep() {
-		tiredness -= 7;
+		petBoredom -= 7;
 	}
 
 	public void tick() {
-		hunger += 2;
-		thirst += 2;
-		waste += 2;
-		boredom += 2;
-		tiredness += 2;
-	}
-
-	// status check
-	public String statusUpdate() {
-		if (hunger > 3) {
-			return "Your cat is hungry!\n";
-		} else if (thirst > 3) {
-			return "Your cat is thirsty!\n";
-		} else if (waste > 3) {
-			return "Everybody has to poop, and so does your cat... like right now.\n";
-		} else if (boredom > 3) {
-			return "You're SO BORING. Play with your cat!\n";
-		} else if (tiredness > 3) {
-			return "Your cat seems sleepy.\n";
-		} else
-			return "";
-	}
-
-	boolean notDead() {
-		if (hunger > 10 || thirst > 10 || waste > 10 || boredom > 10 || tiredness > 10) {
-			return false;
-		}
-		return true;
-	}
-
-	String death() {
-		if (hunger > 10) {
-			return "Your cat starved to death!";
-		} else if (thirst > 10) {
-			return "Your cat died of dehydration!";
-		} else if (waste > 10) {
-			return "Your cat ran away to shit and never came back!";
-		} else if (boredom > 10) {
-			return "Your cat didn't die of boredom, but it did find a better owner that plays with them and is now way happier.";
-		} else if (tiredness > 10) {
-			return "Your cat died of exhaustion!";
-		} else
-			return "";
+		petHunger += 2;
+		petThirst += 2;
+		petBoredom += 2;
 	}
 }

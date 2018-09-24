@@ -1,120 +1,118 @@
 package virtualPetShelter;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 public class VirtualPetTest {
 
 	@Test
-	public void shouldPassFromInitialToHunger() {
+	public void shouldGetName() {
 		// arrange
-		VirtualPet underTest = new VirtualPet(5, 0, 0, 0, 0);
+		VirtualPet underTest = new VirtualPet("Name", 0, 0, 0);
 		// act
-		int hunger = underTest.hunger;
+		String actual = underTest.getName();
 		// assert
-		Assert.assertEquals(5, hunger, 0);
+		assertEquals("Name", actual);
 	}
 
 	@Test
-	public void shouldPassFromInitialToThirst() {
+	public void shouldGetDescription() {
 		// arrange
-		VirtualPet underTest = new VirtualPet(0, 5, 0, 0, 0);
+		VirtualPet underTest = new VirtualPet("Name", "Description");
 		// act
-		int thirst = underTest.thirst;
+		String actual = underTest.getDescription();
 		// assert
-		Assert.assertEquals(5, thirst, 0);
+		assertEquals("Description", actual);
 	}
 
 	@Test
-	public void shouldPassFromInitialToWaste() {
+	public void shouldGetHunger() {
 		// arrange
-		VirtualPet underTest = new VirtualPet(0, 0, 5, 0, 0);
+		VirtualPet underTest = new VirtualPet("Name", 5, 0, 0);
 		// act
-		int waste = underTest.waste;
+		int actual = underTest.getHunger();
 		// assert
-		Assert.assertEquals(5, waste, 0);
+		assertEquals(5, actual);
 	}
 
 	@Test
-	public void shouldPassFromInitialToBoredom() {
+	public void shouldGetThirst() {
 		// arrange
-		VirtualPet underTest = new VirtualPet(0, 0, 0, 5, 0);
+		VirtualPet underTest = new VirtualPet("Name", 0, 5, 0);
 		// act
-		int boredom = underTest.boredom;
+		int actual = underTest.getThirst();
 		// assert
-		Assert.assertEquals(5, boredom, 0);
+		assertEquals(5, actual);
 	}
 
 	@Test
-	public void shouldPassFromInitialToTirdness() {
+	public void shouldGetBoredom() {
 		// arrange
-		VirtualPet underTest = new VirtualPet(0, 0, 0, 0, 5);
+		VirtualPet underTest = new VirtualPet("Name", 0, 0, 5);
 		// act
-		int tiredness = underTest.tiredness;
+		int actual = underTest.getBoredom();
 		// assert
-		Assert.assertEquals(5, tiredness, 0);
-	}
-
-	// Math tests
-
-	@Test
-	public void shouldSubtractFromHunger() {
-		// arrange
-		VirtualPet underTest = new VirtualPet(7, 0, 0, 0, 0);
-		// act
-		underTest.eat();
-		// assert
-		Assert.assertEquals(0, underTest.hunger, 0);
+		assertEquals(5, actual);
 	}
 
 	@Test
-	public void shouldSubtractFromThirst() {
+	public void shouldFeed() {
 		// arrange
-		VirtualPet underTest = new VirtualPet(0, 7, 0, 0, 0);
+		VirtualPet underTest = new VirtualPet("Name", 7, 0, 0);
 		// act
-		underTest.drink();
+		underTest.feed();
 		// assert
-		Assert.assertEquals(0, underTest.thirst, 0);
+		assertEquals("Should be 0 having subtracted 7", 0, underTest.petHunger, .5);
 	}
 
 	@Test
-	public void shouldSubtractFromWaste() {
+	public void shouldWater() {
 		// arrange
-		VirtualPet underTest = new VirtualPet(0, 0, 7, 0, 0);
+		VirtualPet underTest = new VirtualPet("Name", 0, 7, 0);
 		// act
-		underTest.bathroom();
+		underTest.water();
 		// assert
-		Assert.assertEquals(0, underTest.waste, 0);
+		assertEquals("Should be 0 having subtracted 7", 0, underTest.petThirst, .5);
 	}
 
 	@Test
-	public void shouldSubtractFromBoredom() {
+	public void shouldPlay() {
 		// arrange
-		VirtualPet underTest = new VirtualPet(0, 0, 0, 7, 0);
+		VirtualPet underTest = new VirtualPet("Name", 0, 0, 7);
 		// act
 		underTest.play();
 		// assert
-		Assert.assertEquals(0, underTest.boredom, 0);
+		assertEquals("Should be 0 having subtracted 7", 0, underTest.petBoredom, .5);
 	}
 
 	@Test
-	public void shouldSubtractFromTiredness() {
+	public void shouldTickHunger() {
 		// arrange
-		VirtualPet underTest = new VirtualPet(0, 0, 0, 0, 7);
+		VirtualPet underTest = new VirtualPet("Name", 0, 0, 0);
 		// act
-		underTest.sleep();
+		underTest.tick();
 		// assert
-		Assert.assertEquals(0, underTest.tiredness, 0);
+		assertEquals("Should be 2 having added 2", 2, underTest.petHunger, .5);
 	}
 
 	@Test
-	public void shouldTestIfAlive() {
+	public void shouldTickThirst() {
 		// arrange
-		VirtualPet underTest = new VirtualPet(0, 0, 0, 0, 0);
+		VirtualPet underTest = new VirtualPet("Name", 0, 2, 0);
 		// act
-		boolean notDead = underTest.notDead();
+		underTest.tick();
 		// assert
-		Assert.assertTrue(notDead);
+		assertEquals("Should be 4 having added 2", 4, underTest.petThirst, .5);
 	}
 
+	@Test
+	public void shouldTickBoredom() {
+		// arrange
+		VirtualPet underTest = new VirtualPet("Name", 0, 0, 4);
+		// act
+		underTest.tick();
+		// assert
+		assertEquals("Should be 6 having added 2", 6, underTest.petBoredom, .5);
+	}
 }
